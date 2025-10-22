@@ -25,6 +25,7 @@ public class PostfixCalculator{
             }
             else
             {
+            /*
             Read the next character, which is an operator.
             Pop two numbers off the stack.
             Combine the two numbers with the operator using the
@@ -34,5 +35,6 @@ public class PostfixCalculator{
             }
             At this point, the stack contains one number, which is the
             result of the expression.
+            */
     }
 }

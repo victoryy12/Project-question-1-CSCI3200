@@ -1,4 +1,4 @@
-// package CSCI3200;
+//package CSCI3200;
 
 import java.util.Stack;
 
@@ -15,34 +15,37 @@ public class PostfixCalculator {
     
     public void evaluatePostfix(Stack<Integer> stack) {
         String[] tokens = postfixExpression.split(" ");
-        
-        for (String token : tokens) {
-            if (isInteger(token)) {
-                int num = Integer.parseInt(token);
+        int i = 0;
+        while (i < tokens.length) {
+            if (isInteger(tokens[i])) {
+                int num = Integer.parseInt(tokens[i]);
                 stack.push(num);
             } 
             else {
-                char operator = token.charAt(0);
+                char operator = tokens[i].charAt(0);
                 
                 int num2 = stack.pop();
                 int num1 = stack.pop(); 
                 
                 int result = 0;
                 
-                if (operator == '+') {
-                    result = num1 + num2;
-                } else if (operator == '-') {
-                    result = num1 - num2;
-                } else if (operator == '*') {
-                    result = num1 * num2;
-                } else if (operator == '/') {
-                    result = num1 / num2;
-                } else if (operator == '%') {
-                    result = num1 % num2;
+                switch (operator) {
+                    case '+':
+                        result = num1 + num2;
+                        break;
+                    case '-':
+                        result = num1 - num2;
+                        break;
+                    case '*':
+                        result = num1 * num2;
+                        break;
+                    case '/':
+                        result = num1 / num2;
+                        break;
                 }
-                
                 stack.push(result);
             }
+            i += 1;
         }
     }
     
@@ -51,19 +54,11 @@ public class PostfixCalculator {
     }
     
     public boolean isInteger(String token) {
-        try {
-            Integer.parseInt(token);
-            return true;
-        } catch (NumberFormatException e) {
-            return false;
+        for (int i = 0; i < token.length(); i++) {
+            if (!Character.isDigit(token.charAt(i))) {
+                return false;
+            }
         }
-    }
-    
-    public String getPostfixExpression() {
-        return postfixExpression;
-    }
-    
-    public void setPostfixExpression(String postfixExpression) {
-        this.postfixExpression = postfixExpression;
+        return true;
     }
 }

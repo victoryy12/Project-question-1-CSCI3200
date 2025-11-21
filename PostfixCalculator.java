@@ -54,11 +54,15 @@ public class PostfixCalculator {
     }
     
     public boolean isInteger(String token) {
-        for (int i = 0; i < token.length(); i++) {
-            if (!Character.isDigit(token.charAt(i))) {
-                return false;
-            }
+        if (token == null || token.isEmpty()) {
+            return false;
         }
-        return true;
+        try {
+            Integer.parseInt(token);
+            return true;
+        } 
+        catch (Exception e) {
+            return false;
+        }
     }
 }
